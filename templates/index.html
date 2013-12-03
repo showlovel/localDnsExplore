@@ -1,0 +1,66 @@
+<!doctype>
+<html>
+<head>
+<link rel=stylesheet type=text/css href="{{url_for('static', filename='css/bootstrap.css')}}"></link>
+<link rel=stylesheet type=text/css href="{{url_for('static', filename='css/flat-ui.css')}}"></link>
+</head>
+<body>
+<div class="container">
+  <h3>Local Dns Explore</h3>
+  <form action="{{url_for("breakdownCreate")}}" method="post" accept-charset="utf-8">
+    <table class="table">
+      <thead>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          Name:
+        </td>
+        <td>
+          <div class="form-group">
+            <input type="text" name="some_name" class="form-control" value>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Phone:
+        </td>
+        <td>
+          <div class="form-group">
+            <input type="text" name="some_name" class="form-control" value>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Email
+        </td>
+        <td>
+          <div class="form-group">
+            <input type="text" name="some_name" class="form-control" value>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <input type="submit" name="some_name" class="btn" value="Submit">
+        </td>
+        <td>
+          <div class="form-group">
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+<script type="text/javascript" src="{{url_for('static', filename='js/application.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-select.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-switch.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-typeahead.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/flatui-checkbox.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/flatui-radio.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.8.3.min.js')}}"></script>
+</html>
