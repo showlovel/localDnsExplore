@@ -5,9 +5,9 @@
 <link rel=stylesheet type=text/css href="{{url_for('static', filename='css/flat-ui.css')}}"></link>
 </head>
 <body>
-<div class="container">
+<div class="container" style="width:50%">
   <h3>Local Dns Explore</h3>
-  <form action="{{url_for("breakdownCreate")}}" method="post" accept-charset="utf-8">
+  <form action="{{url_for("problem")}}" method="post" accept-charset="utf-8">
     <table class="table">
       <thead>
       </thead>
@@ -18,7 +18,7 @@
         </td>
         <td>
           <div class="form-group">
-            <input type="text" name="some_name" class="form-control" value>
+            <input type="text" name="name" placeholder="name" class="form-control input-sm" value>
           </div>
         </td>
       </tr>
@@ -28,17 +28,17 @@
         </td>
         <td>
           <div class="form-group">
-            <input type="text" name="some_name" class="form-control" value>
+            <input type="text" name="phone" placeholder="phone" class="form-control input-sm" value>
           </div>
         </td>
       </tr>
       <tr>
         <td>
-          Email
+          Email:
         </td>
         <td>
           <div class="form-group">
-            <input type="text" name="some_name" class="form-control" value>
+            <input type="text" name="email" placeholder="email" class="form-control input-sm" value>
           </div>
         </td>
       </tr>
@@ -48,7 +48,7 @@
         </td>
         <td>
           <div class="form-group">
-            <input type="text" name="some_name" class="form-control" value>
+            <input type="text" name="company" placeholder="company" class="form-control input-sm" value>
           </div>
         </td>
       </tr>
@@ -58,7 +58,7 @@
         </td>
         <td>
           <div class="form-group">
-            <input type="text" name="some_name" class="form-control" value>
+            <input type="text" name="url" placeholder="url" class="form-control input-sm" value>
           </div>
         </td>
       </tr>
@@ -68,17 +68,15 @@
         </td>
         <td>
           <div class="form-group">
-            <textarea name="Name" rows="8" cols="40" class="form-control"></textarea>
+            <textarea name="detail" placeholder="details of problem" rows="6" cols="40" class="form-control input-sm"></textarea>
           </div>
         </td>
       </tr>
       <tr>
         <td>
-            <input type="submit" name="some_name" class="btn" value="Submit">
         </td>
         <td>
-          <div class="form-group">
-          </div>
+            <input type="submit" name="some_name" class="btn btn-primary pull-right" value="Submit">
         </td>
       </tr>
       </tbody>
