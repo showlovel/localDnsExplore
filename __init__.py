@@ -1,7 +1,8 @@
 from flask import *
 from models import *
 
-app = Flask(__name__)
+app = Flask("localDnsExplore")
+app.config.from_object("localDnsExplore")
 
 @app.route("/", methods=['GET'])
 def index():
@@ -23,17 +24,19 @@ def problem():
     return ""
   elif request.method == "POST":
 
-    name    = request.form['name']
-    email   = request.form['email']
-    phone   = request.form['phone']
-    company = request.form['company']
-    url     = request.form['url']
-    detail  = request.form['detail']
+    problem = {
+        'name'         : request.form['name'],
+        'email'        : request.form['email'],
+        'phone'        : request.form['phone'],
+        'company'      : request.form['company'],
+        'url'          : request.form['url'],
+        'description'  : request.form['description']
+        }
 
-    p = Problem()
+    p = Problem(problem)
     p.save()
 
-    return "Hello" + name
+    return "Hello" + request.form['name']
   elif request.method == "DELETE":
     print "DELETE"
     return ""
@@ -45,4 +48,4 @@ def problem():
     return ""
 
 if __name__=="__main__":
-  app.run(debug = True)
+  app.run()

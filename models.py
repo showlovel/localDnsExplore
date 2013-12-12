@@ -1,21 +1,15 @@
+from sqlalchemy import *
 import os
 
 class Problem:
-  def __init_(self):
-    pass
-    #self.name         = name
-    #self.phone        = phone
-    #self.email        = email
-    #self.url          = url
-    #self.description  = description
-    #self.clientIp     = clientIp
-    #self.localDns     = localDns
-    #self.edgeServerIp = edgeServerIp
-    #self.hostname     = hostname
-    #self.company      = company
-    #self.registId     = registId
-    #self.domain       = domain
+  def __init__(self, args):
+    self.name         = args['name']
+    self.phone        = args['phone']
+    self.email        = args['email']
+    self.url          = args['url']
+    self.description  = args['description']
+    self.company      = args['company']
 
   def save(self):
-    cmd = "awk '/", self.domain, "/ {print} ' /var/named/query.log|sed -n '$p'"
+    cmd = "awk '/"+"/ {print} ' /var/named/query.log|sed -n '$p'"
     print cmd
