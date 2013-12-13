@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <th>Name</th>
+      <th>Url</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Company</th>
+    </thead>
+    <tbody>
+    {% for monkey in monkeys %}
+    <tr>
+      <td>{{ monkey.name }}</td>
+      <td>{{ monkey.url }}</td>
+      <td>{{ monkey.email }}</td>
+      <td>{{ monkey.phone }}</td>
+      <td>{{ monkey.company }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

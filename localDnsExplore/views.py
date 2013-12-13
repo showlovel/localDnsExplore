@@ -8,10 +8,11 @@ import default_settings
 def index():
   return render_template('index.html')
 
-@app.route("/monkey", methods=['GET'])
+@app.route("/monkey", methods=['GET','POST'])
 def monkey():
-  return render_template('index.html')
+  monkeys = Monkey.query.all()
+  return render_template('monkey/index.html', monkeys = monkeys)
 
-@app.before_request
-def before_request():
-  print "before request"
+#@app.before_request
+#def before_request():
+#  print "before request"
