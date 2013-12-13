@@ -1,7 +1,8 @@
 from sqlalchemy import *
+from sqlalchemy.orm import *
 import os
 
-class Problem:
+class Monkey:
   def __init__(self, args):
     self.name         = args['name']
     self.phone        = args['phone']
@@ -13,3 +14,9 @@ class Problem:
   def save(self):
     cmd = "awk '/"+"/ {print} ' /var/named/query.log|sed -n '$p'"
     print cmd
+
+class User:
+  pass
+
+class Role:
+  pass

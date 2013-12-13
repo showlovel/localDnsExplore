@@ -1,7 +1,7 @@
-from flask import *
-from models import *
+from flask import Flask
+from localDnsExplore import views
 
-app = Flask("localDnsExplore")
+app = Flask(__name__)
 app.config.from_object("localDnsExplore")
 
 @app.route("/", methods=['GET'])
@@ -24,7 +24,7 @@ def problem():
     return ""
   elif request.method == "POST":
 
-    problem = {
+    monkey = {
         'name'         : request.form['name'],
         'email'        : request.form['email'],
         'phone'        : request.form['phone'],
@@ -33,7 +33,7 @@ def problem():
         'description'  : request.form['description']
         }
 
-    p = Problem(problem)
+    p = Monkey(monkey)
     p.save()
 
     return "Hello" + request.form['name']
