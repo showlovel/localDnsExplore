@@ -1,50 +1,44 @@
 drop table if exists monkey;
-CREATE TABLE monkey (
-  id bigint(20) NOT NULL AUTO_INCREMENT,
-  version bigint(20) NOT NULL,
-  client_ip varchar(255) DEFAULT NULL,
-  commit_time datetime NOT NULL,
-  company varchar(255) NOT NULL,
-  description varchar(2000) DEFAULT NULL,
-  domain varchar(255) NOT NULL,
-  edge_server_ip varchar(255) DEFAULT NULL,
-  email varchar(255) NOT NULL,
-  hostname varchar(255) DEFAULT NULL,
-  local_dns varchar(255) DEFAULT NULL,
-  name varchar(255) NOT NULL,
-  phone varchar(255) NOT NULL,
-  url varchar(255) DEFAULT NULL,
-  regist_id varchar(255) DEFAULT NULL,
-  PRIMARY KEY (id)
+create table monkey (
+  id integer primary key autoincrement,
+  version integer not null,
+  client_ip varchar(255) default null,
+  commit_time timestamp not null,
+  company varchar(255) not null,
+  description varchar(2000) default null,
+  domain varchar(255) not null,
+  edge_server_ip varchar(255) default null,
+  email varchar(255) not null,
+  hostname varchar(255) default null,
+  local_dns varchar(255) default null,
+  name varchar(255) not null,
+  phone varchar(255) not null,
+  url varchar(255) default null,
+  regist_id varchar(255) default null
 );
+
 drop table if exists role;
-CREATE TABLE role (
-  id bigint(20) NOT NULL AUTO_INCREMENT,
-  version bigint(20) NOT NULL,
-  authority varchar(255) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY authority (authority)
+create table role(
+  id integer primary key autoincrement,
+  version integer not null,
+  authority varchar(255) unique not null
 );
+
 drop table if exists user_role;
-CREATE TABLE user_role (
-  role_id bigint(20) NOT NULL,
-  user_id bigint(20) NOT NULL,
-  PRIMARY KEY (role_id,user_id),
-  KEY `FK143BF46AFE397551` (`role_id`),
-  KEY `FK143BF46AA3643931` (`user_id`),
-  CONSTRAINT `FK143BF46AA3643931` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FK143BF46AFE397551` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
+create table user_role(
+  role_id integer,
+  user_id integer,
+  primary key (role_id,user_id)
 );
+
 drop table if exists user;
-CREATE TABLE user (
-  id bigint(20) NOT NULL AUTO_INCREMENT,
-  version bigint(20) NOT NULL,
-  account_expired bit(1) NOT NULL,
-  account_locked bit(1) NOT NULL,
-  enabled bit(1) NOT NULL,
-  password varchar(255) NOT NULL,
-  password_expired` bit(1) NOT NULL,
-  username varchar(255) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY username (username)
+create table user (
+  id integer primary key autoincrement,
+  version integer not null,
+  account_expired bit(1) not null,
+  account_locked bit(1) not null,
+  enabled boolean not null,
+  password varchar(255) not null,
+  password_expired boolean not null,
+  username varchar(255) unique not null
 );
