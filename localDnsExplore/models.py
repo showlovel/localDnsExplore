@@ -33,8 +33,30 @@ class Monkey(Base):
     cmd = "awk '/"+"/ {print} ' /var/named/query.log|sed -n '$p'"
     print cmd
 
-class User:
-  pass
+association_table = Table('user_role', Base.metadata,
+    Column('user_id', Integer, ForeignKey("user.id")),
+    Column('role_id', Integer, ForeignKey("role.id"))
+)
 
-class Role:
-  pass
+class User(Base):
+  __tablename__    = 'user'
+  id               = Column(Integer, primary_key=True)
+  version          = Column(Integer)
+  enabled          = Column(Binary)
+  password         = Column(String(255))
+  password_expired = Column(String(255))
+  username         = Column(String(255))
+  children = relationship("Role", secondary=association_table)
+
+  def __init__(self):
+    pass
+
+class Role(Base):
+  __tablename__ = 'role'
+  id        = Column(Integer, primary_key=True)
+  version   = Column(Integer)
+  authority = Column(String(255))
+
+  def __init__(self):
+    pass
+

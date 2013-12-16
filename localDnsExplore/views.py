@@ -6,6 +6,8 @@ import default_settings
 
 @app.route("/", methods=['GET'])
 def index():
+  users = User.query.all()
+  print users[0].children[0].authority
   return render_template('index.html')
 
 @app.route("/monkey", methods=['GET','POST'])
