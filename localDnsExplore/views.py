@@ -2,12 +2,14 @@ from flask import *
 from models import *
 from localDnsExplore import app
 import default_settings
+import utils
 
 
 @app.route("/", methods=['GET'])
 def index():
   users = User.query.all()
   print users[0].children[0].authority
+  utils.mailTo("showlovel@sina.com")
   return render_template('index.html')
 
 @app.route("/monkey", methods=['GET','POST'])
