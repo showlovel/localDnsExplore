@@ -16,10 +16,18 @@ def monkeys():
   monkeys = Monkey.query.all()
   return render_template('monkey/index.html', monkeys = monkeys)
 
-@app.route("/monkey", methods=['GET','POST'])
+@app.route("/monkey", methods=['POST'])
 def monkey():
-  monkeys = Monkey.query.all()
-  return render_template('monkey/index.html', monkeys = monkeys)
+  if request.method=='POST':
+    name        = request.form['name']
+    phone       = request.form['phone']
+    email       = request.form['email']
+    company     = request.form['company']
+    url         = request.form['url']
+    description = request.form['description']
+    return render_template('index.html')
+  else:
+    pass
 
 #@app.before_request
 #def before_request():
