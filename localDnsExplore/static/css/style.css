@@ -1,6 +1,8 @@
 .content{
 }
 .footer{
+  font-size:10px;
+  text-align:right;
   position:absolute;
   bottom:0;
   left:0;
@@ -10,11 +12,10 @@
   margin-bottom:40px;
 }
 .footer,.header{
-  text-align:center;
 }
 .boxer{
   border-radius:5px ;
-  border:1px grey solid;
+  border:1px #ccc solid;
   padding:15px 10px 5px 10px ;
   background-color:#ddd;
 }
