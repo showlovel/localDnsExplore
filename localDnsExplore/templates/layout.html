@@ -6,13 +6,19 @@
 <link rel=stylesheet type=text/css href="{{url_for('static', filename='css/style.css')}}"></link>
 </head>
 <body>
-<div class="test">
-<h4>Local Dns Explore</h4>
-<a href="{{url_for("monkey")}}">MonkeyList</a>
+<div class="header">
 </div>
-{% block body %}
-{% endblock%}
+<div class="content ">
+  {% block body %}
+  {% endblock%}
+</div>
+  <a href="{{url_for("monkeys")}}">MonkeyList</a>
 </body>
+<div class="footer ">
+  <p>
+  © Copyright 2012, YSY. Created using Flask.
+  </p>
+</div>
 <script type="text/javascript" src="{{url_for('static', filename='js/application.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-select.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-switch.js')}}"></script>

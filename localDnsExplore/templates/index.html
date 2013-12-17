@@ -1,82 +1,65 @@
 {% extends "layout.html" %}
 {% block body %}
-<div class="container" style="width:50%">
+<div class="container " style="width:43%">
   {%if(true):%}
   {%endif%}
-  <form action="{{url_for('monkey')}}" method="post" accept-charset="utf-8">
-    <table class="table">
-      <thead>
-      </thead>
-      <tbody>
-      <tr>
-        <td>
-          Name:
-        </td>
-        <td>
-          <div class="form-group">
-            <input type="text" name="name" placeholder="name" class="form-control input-sm" value>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Phone:
-        </td>
-        <td>
-          <div class="form-group">
-            <input type="text" name="phone" placeholder="phone" class="form-control input-sm" value>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Email:
-        </td>
-        <td>
-          <div class="form-group">
-            <input type="text" name="email" placeholder="email" class="form-control input-sm" value>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Company:
-        </td>
-        <td>
-          <div class="form-group">
-            <input type="text" name="company" placeholder="company" class="form-control input-sm" value>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Url:
-        </td>
-        <td>
-          <div class="form-group">
-            <input type="text" name="url" placeholder="url" class="form-control input-sm" value>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Description:
-        </td>
-        <td>
-          <div class="form-group">
-            <textarea name="description" placeholder="details of problem" rows="6" cols="40" class="form-control input-sm"></textarea>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        </td>
-        <td>
-          <input type="submit" name="some_name" class="btn btn-primary pull-right" value="Submit">
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </form>
+  故障提交
+  <div class="boxer">
+    <form action="{{url_for('monkey')}}" method="post" accept-charset="utf-8">
+      <table class="table monkeyform">
+        <thead>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <div class="form-group">
+              <input type="text" name="name" placeholder="姓名" class="form-control input-sm" value>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-group">
+              <input type="text" name="phone" placeholder="电话" class="form-control input-sm" value>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-group">
+              <input type="text" name="email" placeholder="邮箱 例如: xxx@sohu.com" class="form-control input-sm" value>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-group">
+              <input type="text" name="company" placeholder="公司" class="form-control input-sm" value>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-group">
+              <input type="text" name="url" placeholder="Url 例如:http://www.gogo.com/img/111.gif" class="form-control input-sm" value>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-group">
+              <textarea name="description" placeholder="问题描述" rows="3" cols="40" class="form-control input-sm"></textarea>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" name="some_name" class="btn btn-primary btn-sm pull-right" value="提交">
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
 </div>
 {% endblock %}

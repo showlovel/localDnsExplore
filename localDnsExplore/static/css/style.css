@@ -1,3 +1,24 @@
-.test{
-  border:1px solid red;
+.content{
+}
+.footer{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+}
+.header{
+  margin-bottom:40px;
+}
+.footer,.header{
+  text-align:center;
+}
+.boxer{
+  border-radius:5px ;
+  border:1px grey solid;
+  padding:15px 10px 5px 10px ;
+  background-color:#ddd;
+}
+.monkeyform> tbody > tr > td{
+  border-top:0px;
+  vertical-align:none;
 }
