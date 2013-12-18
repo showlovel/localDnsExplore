@@ -1,7 +1,7 @@
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from localDnsExplore.database import Base
-import os
+import commands
 
 class Monkey(Base):
   __tablename__  = 'monkey'
@@ -31,12 +31,22 @@ class Monkey(Base):
 
   def save(self):
     cmd = "awk '/"+"/ {print} ' /var/named/query.log|sed -n '$p'"
-    print cmd
+    status, res = commands.getstatusoutput(cmd)
+    cname = self.hostname
+    if self.hostname:
+      pass
+    try:
+      self.local_dns = res.split(" ")[6].split("#")[0]
+      pass
+    except Exception, e:
+      raise e
+    finally:
+      pass
 
 association_table = Table('user_role', Base.metadata,
     Column('user_id', Integer, ForeignKey("user.id")),
     Column('role_id', Integer, ForeignKey("role.id"))
-)
+    )
 
 class User(Base):
   __tablename__    = 'user'
