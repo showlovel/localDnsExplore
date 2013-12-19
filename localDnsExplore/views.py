@@ -32,7 +32,7 @@ def monkey():
     monkey.url         = request.form['url']
     monkey.description = request.form['description']
     monkey.save()
-    monkey.version = 1
+    monkey.version  = 1
     db_session.add(monkey)
     db_session.commit()
     return redirect(url_for('index'))

@@ -27,28 +27,28 @@ class Monkey(Base):
     pass
 
   def save(self):
-    self.domain = "yachuan" + ''.join(random.sample(string.lowercase,8)) + ".term.chinacache.net"
-    cmd         = "awk '/" + self.domain + "/ {print} ' /var/named/query.log|sed -n '$p'"
+    self.hostname = "apk.lenovomm.com"
+    self.domain   = "yachuanlr3ux73a5ul8.term.chinacache.net"
 
-    print "---------"
-    print cmd
-    print "---------"
+    #self.domain = "yachuan" + ''.join(random.sample(string.lowercase,18)) + ".term.chinacache.net"
+    cmd         = "awk '/" + self.domain + "/ {print} ' /var/named/query.log|sed -n '$p'"
+    serverIp    = ""
 
     status, res = commands.getstatusoutput(cmd)
 
-    print "---------"
-    print status
+    print "-----------------"
+    print cmd
     print res
-    print "---------"
+    print "-----------------"
 
-    serverIp    = ""
     cname = self.hostname
-    iscc = lambda domain:domain.endswith("ccgslb.net") or domain.endswith("ccgslb.com") or domain.endswith("chinacache.net")
+    iscc  = lambda domain:domain.endswith("ccgslb.net") or domain.endswith("ccgslb.com") or domain.endswith("chinacache.net")
 
     try:
       self.local_dns = res.split(" ")[6].split("#")[0]
 
       if self.hostname and iscc(self.hostname):
+
         cmd = "dig " + self.hostname
         sts, ccres = commands.getstatusoutput(cmd)
 
@@ -69,9 +69,6 @@ class Monkey(Base):
                   self.edge_server_ip = serverIp
 
     except Exception, e:
-      print "-----"
-      print e
-      print "-----"
       raise e
     finally:
       pass
