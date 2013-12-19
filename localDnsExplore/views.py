@@ -2,6 +2,7 @@
 from flask import *
 from models import *
 from localDnsExplore import app
+from localDnsExplore.database import db_session
 import default_settings
 import utils
 
@@ -23,13 +24,18 @@ def monkeys():
 @app.route("/monkey", methods=['POST'])
 def monkey():
   if request.method=='POST':
-    name        = request.form['name']
-    phone       = request.form['phone']
-    email       = request.form['email']
-    company     = request.form['company']
-    url         = request.form['url']
-    description = request.form['description']
-    return render_template('index.html')
+    monkey             = Monkey()
+    monkey.name        = request.form['name']
+    monkey.phone       = request.form['phone']
+    monkey.email       = request.form['email']
+    monkey.company     = request.form['company']
+    monkey.url         = request.form['url']
+    monkey.description = request.form['description']
+    monkey.save()
+    monkey.version = 1
+    db_session.add(monkey)
+    db_session.commit()
+    return redirect(url_for('index'))
   else:
     pass
 
