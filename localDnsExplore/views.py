@@ -5,44 +5,30 @@ from localDnsExplore import app
 from localDnsExplore.database import db_session
 import default_settings
 import utils
-
-
-# 问题提交页面
-@app.route("/", methods=['GET'])
-def index():
-  #utils.mailTo("","")
-  return render_template('index.html')
-
-# 查看已经提交的问题
-@app.route("/monkeys/", methods=['GET'])
-@app.route("/monkeys",  methods=['GET'])
-def monkeys():
-  monkeys = Monkey.query.all()
-  return render_template('monkey/index.html', monkeys = monkeys)
-
-# 网民提交问题·
-@app.route("/monkey", methods=['POST'])
-def monkey():
-  if request.method=='POST':
-    monkey             = Monkey()
-    monkey.name        = request.form['name']
-    monkey.phone       = request.form['phone']
-    monkey.email       = request.form['email']
-    monkey.company     = request.form['company']
-    monkey.url         = request.form['url']
-    monkey.description = request.form['description']
-    monkey.save()
-    monkey.version  = 1
-    db_session.add(monkey)
-    db_session.commit()
-    return redirect(url_for('index'))
-  else:
-    pass
+import time
 
 @app.route("/auto_detect")
 @app.route("/auto_detect/<hostname>")
 def auto_detect():
-  pass
+  hostname = request.args['hostname']
+  domain   = "yachuan" + ''.join(random.sample(string.lowercase,18)) + ".term.chinacache.net"
+  print domain
+  return render_template("info.html", domain=domain, hostname=hostname)
+
+@app.route("/query",  methods=['GET'])
+def query():
+  hostname = request.args['hostname']
+  domain   = request.host
+  ip       = request.remote_addr
+  now      = time.strftime("%Y-%m-%d %H:%M:%S")
+  monkey   = Monkey(hostname, domain, ip, now)
+  monkey.save()
+  infos = {}
+  infos['client']      = monkey.client_ip
+  infos['local_dns']   = monkey.local_dns
+  infos['edge_server'] = monkey.edge_server_ip
+  infos['commit_time'] = monkey.commit_time
+  return  jsonify(infos)
 
 #@app.before_request
 #def before_request():

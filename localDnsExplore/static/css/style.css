@@ -20,10 +20,6 @@
   background-color:#ddd;
   min-height:500px;
 }
-.monkeyform> tbody > tr > td{
-  border-top:0px;
-  vertical-align:none;
-}
-.monkeys > tbody > tr > td{
-  padding:0px;
+.confirm{
+  font-size:10px;
 }

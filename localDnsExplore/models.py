@@ -23,80 +23,37 @@ class Monkey(Base):
   regist_id      = Column(String(255))
   commit_time    = Column(Date)
 
-  def __init__(self):
-    pass
+  def __init__(self, hostname, domain, ip, commit_time):
+    self.hostname = hostname
+    self.domain   = domain
+    self.edge_server_ip = ""
+    self.client_ip = ip
+    self.commit_time = commit_time
 
   def save(self):
-    self.hostname = "apk.lenovomm.com"
-    self.domain   = "yachuanlr3ux73a5ul8.term.chinacache.net"
-
-    #self.domain = "yachuan" + ''.join(random.sample(string.lowercase,18)) + ".term.chinacache.net"
-    cmd         = "awk '/" + self.domain + "/ {print} ' /var/named/query.log|sed -n '$p'"
-    serverIp    = ""
-
-    status, res = commands.getstatusoutput(cmd)
-
-    print "-----------------"
-    print cmd
-    print res
-    print "-----------------"
-
+    cmd      = "awk '/" + self.domain + "/{print}'" + " /var/named/query.log|sed -n '$p'"
+    dnsStrs  = commands.getoutput(cmd)
     cname = self.hostname
-    iscc  = lambda domain:domain.endswith("ccgslb.net") or domain.endswith("ccgslb.com") or domain.endswith("chinacache.net")
-
+    iscc = lambda strs:strs.endswith("ccgslb.net") or strs.endswith("ccgslb.com") or strs.endswith("chinacache.net") or strs.endswith("ccgslb.com.cn")
     try:
-      self.local_dns = res.split(" ")[6].split("#")[0]
+      self.local_dns = dnsStrs.split()[6].split("#")[0]
+      if(self.hostname):
+        if not iscc(hostname):
+          cmd = "dig " + hostname
+          res = commands.getoutput(cmd)
+          for ll in res.split("\n"):
+            strs = ll.split()
+            if len(strs)==5 and not strs[0].startswith(";") and strs[3]=="CNAME":
+              cname = strs[4][:-1]
 
-      if self.hostname and iscc(self.hostname):
-
-        cmd = "dig " + self.hostname
-        sts, ccres = commands.getstatusoutput(cmd)
-
-        for ccline in ccres.split("\n"):
-          ccstrs = ccline.split()
-
-          if len(ccstrs)==5 and not strs[0].startwidth(";") and strs[3]=="CNAME":
-            cname = strs[4][:-2]
-
-            if not iscc(cname):
-              ccdigcmd = "/usr/bin/ccdig.sh " + "202.106.196.115" + cname + " S " + self.local_dns
-              notccres = commands.getoutput(ccdigcmd)
-
-              for notccline in notccres.split("\n"):
-                notccstrs = notccline.split()
-                if notccstrs[0]=='"RR:A':
-                  serverIp = serverIp + "  " + notccstrs[2][:-2]
-                  self.edge_server_ip = serverIp
-
+        if iscc(cname):
+          ccdig = "ccdig.sh" + " 202.106.196.115 " + cname + " S " +self.local_dns
+          res   = commands.getoutput(ccdig)
+          for line in res.split("\n"):
+            strip = line.split()
+            if len(strip)>0 and strip[0]=='"RR:A':
+              self.edge_server_ip += (strip[2][:-1] + " ")
     except Exception, e:
-      raise e
+      print e
     finally:
-      pass
-
-association_table = Table('user_role', Base.metadata,
-    Column('user_id', Integer, ForeignKey("user.id")),
-    Column('role_id', Integer, ForeignKey("role.id"))
-    )
-
-class User(Base):
-  __tablename__    = 'user'
-  id               = Column(Integer, primary_key=True)
-  version          = Column(Integer)
-  enabled          = Column(Binary)
-  password         = Column(String(255))
-  password_expired = Column(String(255))
-  username         = Column(String(255))
-  children = relationship("Role", secondary=association_table)
-
-  def __init__(self):
-    pass
-
-class Role(Base):
-  __tablename__ = 'role'
-  id        = Column(Integer, primary_key=True)
-  version   = Column(Integer)
-  authority = Column(String(255))
-
-  def __init__(self):
-    pass
-
+      print "end process"

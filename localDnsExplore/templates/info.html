@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container boxer" style="width:43%">
+  <form>
+    <input id="hostname" type="hidden" value="{{hostname}}">
+    <input id="req_url"  type="hidden" value="{{domain}}">
+  </form>
+  <table class="table">
+    <tbody>
+    <tr>
+      <td>客户端IP:</td>
+      <td id="client"></td>
+    </tr>
+    <tr>
+      <td>LocalDns:</td>
+      <td id="localdns"></td>
+    </tr>
+    <tr>
+      <td>服务IP:</td>
+      <td id="server"></td>
+    </tr>
+    <tr>
+      <td>探测时间:</td>
+      <td id="commit_time"></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="confirm">
+    *如果发现收集到的LDNS IP地址跟机器上配置的DNS地址不一致，那原因可能是：<br/>&nbsp;&nbsp;&nbsp;&nbsp;1.你用的这个DNS服务器只是个转发DNS服务器，自身不做递归域名查询，而是转给另外的DNS服务器做解析，所以通过该工具看到的是真正做了解析的服务器地址。<br/>&nbsp;&nbsp;&nbsp;&nbsp;2.你用的这个DNS地址对应的是一个DNS服务器池，后端有多台服务器负载均衡，但是他们向外发出的数据包会使用一另外一个IP地址；这种情况通常工具收集到的Local DNS地址会跟你机器配置的DNS地址在一个IP段内。<br/><br/>*如果从工具页面中看到“<font color="red">connection timed out; no servers could be reached</font>”或者“<font color="red">unknown</font>”， 原因可能是：<br/>&nbsp;&nbsp;&nbsp;&nbsp;你用的这个DNS服务器有地域限制，只有在他允许列表中的地址才能得到DNS响应；<br/>&nbsp;&nbsp;&nbsp;&nbsp;建议： 找一另一个没有地域限制的DNS服务器，但是需要跟你的测试机属于相同的运营商和相近的地域；
+  </div>
+  <script type="text/javascript" src="{{url_for('static', filename='js/auto_dected.js')}}"></script>
+</div>
+{% endblock %}
