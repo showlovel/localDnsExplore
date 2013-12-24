@@ -1,0 +1,6 @@
+"PREFERRED:ratio"
+"LOCATION:cnc-bj-bj"
+"IPSimulate:202.106.0.109"
+"RR:A 300 202.108.251.122"
+"IPReceiveFrom:61.135.23.76"
+"IPSET:usr-cnc-kaixin-1|cnc-bj-bj"
