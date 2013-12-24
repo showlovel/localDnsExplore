@@ -2,7 +2,7 @@ function auto_query(){
   console.log("query start")
     url      = $("#req_url").val()
     hostname = $("#hostname").val()
-    req_url  = "http://"+url+"/query?hostname="+hostname+"&jsoncallback=?"
+    req_url  = "http://"+url+":5000/query?hostname="+hostname+"&jsoncallback=?"
     var callback = function(data){
       eval(data);
       $("#client").text($_lanxun_cdn_servers.client);

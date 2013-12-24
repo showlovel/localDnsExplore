@@ -2,7 +2,6 @@
 from flask import *
 from models import *
 from localDnsExplore import app
-from localDnsExplore.database import db_session
 import default_settings
 import utils
 import time
@@ -29,7 +28,3 @@ def query():
   infos['edge_server'] = monkey.edge_server_ip
   infos['commit_time'] = monkey.commit_time
   return  jsonify(infos)
-
-#@app.before_request
-#def before_request():
-#  print "before request"
