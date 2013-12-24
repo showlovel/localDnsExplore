@@ -7,12 +7,15 @@
 <body>
 <div class="header">
 </div>
+<div id="loading"></div>
 {% block body %}
 {% endblock%}
 </body>
 <div class="footer ">
   © Copyright 2012, YSY. Created using Flask.
 </div>
+<script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.10.2.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/jquery-1.8.3.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/spin.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/auto_dected.js')}}"></script>
 </html>

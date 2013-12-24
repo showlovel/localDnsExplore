@@ -1,13 +1,11 @@
 #encoding:utf-8
-from flask import *
+from flask import render_template, request
 from models import *
 from localDnsExplore import app
-import default_settings
 import utils
 import time
 
-@app.route("/auto_detect")
-@app.route("/auto_detect/<hostname>")
+@app.route("/auto_detect", methods=['GET'])
 def auto_detect():
   hostname = request.args['hostname']
   domain   = "yachuan" + ''.join(random.sample(string.lowercase,18)) + ".term.chinacache.net"
@@ -21,10 +19,13 @@ def query():
   ip       = request.remote_addr
   now      = time.strftime("%Y-%m-%d %H:%M:%S")
   monkey   = Monkey(hostname, domain, ip, now)
+  print now
   monkey.save()
+  now      = time.strftime("%Y-%m-%d %H:%M:%S")
+  print now
   infos = {}
   infos['client']      = monkey.client_ip
   infos['local_dns']   = monkey.local_dns
   infos['edge_server'] = monkey.edge_server_ip
   infos['commit_time'] = monkey.commit_time
-  return  jsonify(infos)
+  return  "var $_lanxun_cdn_servers={'client':'"+monkey.client_ip +"', 'local_dns':'" +monkey.local_dns +"', 'edge_server':'"+monkey.edge_server_ip+"', 'commit_time':'" + monkey.commit_time +"'}"
