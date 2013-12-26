@@ -13,7 +13,7 @@ class Monkey():
 
   def save(self):
     print "----start process----"
-    cmd     = "awk '/" + self.domain[:-5] + "/{print}'" + " /var/named/query.log|sed -n '$p'"
+    cmd     = "awk '/" + self.domain + "/{print}'" + " /var/named/query.log|sed -n '$p'"
     print cmd
     dnsStrs = commands.getoutput(cmd)
     cname   = self.hostname

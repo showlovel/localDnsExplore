@@ -12,7 +12,7 @@ function auto_query(){
         $("#commit_time").text($_lanxun_cdn_servers.commit_time)
         spinner.stop()
     }
-  $.getJSON("http://"+req_url+":5000/query?hostname="+hostname+"&jsonback=?").done(callback).fail(callback)
+  $.getJSON("http://"+req_url+"/query?hostname="+hostname+"&jsonback=?").done(callback).fail(callback)
     start_spin()
 }
 
