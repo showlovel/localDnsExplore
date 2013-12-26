@@ -8,21 +8,19 @@ import time
 @app.route("/auto_detect", methods=['GET'])
 def auto_detect():
   hostname = request.args['hostname']
+  app.logger.info("auto_detect:hostname="+hostname)
   domain   = "yachuan" + ''.join(random.sample(string.lowercase,18)) + ".term.chinacache.net"
-  print domain
   return render_template("info.html", domain=domain, hostname=hostname)
 
 @app.route("/query",  methods=['GET'])
 def query():
   hostname = request.args['hostname']
+  app.logger.info("query:hostname="+hostname)
   domain   = request.host
   ip       = request.remote_addr
   now      = time.strftime("%Y-%m-%d %H:%M:%S")
   monkey   = Monkey(hostname, domain, ip, now)
-  print now
   monkey.save()
-  now      = time.strftime("%Y-%m-%d %H:%M:%S")
-  print now
   infos = {}
   infos['client']      = monkey.client_ip
   infos['local_dns']   = monkey.local_dns
